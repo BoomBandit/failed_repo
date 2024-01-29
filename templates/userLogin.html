@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <div>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a id="user" onclick="generateURL()" href="/users/">User</a></li>
+        <li><a href="/users/register">Register</a></li>
+        <li><a href="/users/login">Login</a></li>
+      </ul>
+    </div>
+    {{if .}}
+    <div>
+      <h2>You are Currently Logged in as :</h2>
+      <h3>Username : {{.Username}}</h3>
+      <h3>Email : {{.Email}}</h3>
+      <h3 id="userID">{{.ID}}</h3>
+    </div>
+    {{end}}
+
+    <div>
+      <form class="form" action="" method="post">
+        <div class="labels">
+          <label for="email">Email:</label>
+          <label for="password">Password:</label>
+        </div>
+        <div class="inputs">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <input type="submit" value="Login" />
+        </div>
+      </form>
+    </div>
+  </body>
+  <script>
+    function generateURL() {
+      const URL = document.getElementById("user").href;
+      document.getElementById("user").href =
+        document.getElementById("userID").textContent;
+      console.log(document.getElementById("userID").textContent);
+      console.log(URL);
+    }
+  </script>
+  <style>
+    body {
+      background-color: black !important;
+      color: white;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      /* grid-template-columns: ; */
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .form {
+      display: grid;
+      grid-template-areas: "area1 area2" "area3 area4";
+      grid-template-columns: 1fr 4fr;
+      grid-template-rows: 3fr 1fr;
+      gap: 5px;
+    }
+    .labels {
+      grid-area: area1;
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr;
+    }
+    .inputs {
+      grid-area: area2;
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr;
+    }
+  </style>
+</html>

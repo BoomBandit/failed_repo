@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a id="user" onclick="generateURL()" href="/users/">User</a></li>
+      <li><a href="/users/register">Register</a></li>
+      <li><a href="/users/login">Login</a></li>
+      <li><a href="/users/photos"></a></li>
+    </ul>
+  </div>
+<div>
+<form action="" method="POST">
+  <label for="title" name="title">Title :</label>
+  <label for="caption" name="caption">Caption</label>
+<label for="url" name="url"></label>
+</form>
+</div>
+</body>
+<script>
+    function generateURL() {
+    const URL = document.getElementById("user").href;
+    document.getElementById("user").href = document.getElementById("userID").textContent;
+    console.log(document.getElementById("userID").textContent);
+    console.log(URL);
+  }
+
+</script>
+</html>

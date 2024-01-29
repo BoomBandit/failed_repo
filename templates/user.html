@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User</title>
+  </head>
+  <body>
+    <div>
+      <h1>User</h1>
+
+      <div>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a id="user" onclick="generateURL()" href="/users/">User</a></li>
+          <li><a href="/users/register">Register</a></li>
+          <li><a href="/users/login">Login</a></li>
+        </ul>
+      </div>
+      {{if .}}
+      <div>
+        <h2>You are Currently Logged in as :</h2>
+        <h3>Username : {{.Username}}</h3>
+        <h3>Email : {{.Email}}</h3>
+        <h3 id="userID">{{.ID}}</h3>
+      </div>
+      {{end}}
+      <form
+        onsubmit="return validatePassword()"
+        class="form"
+        action=""
+        method="POST"
+      >
+        <div class="labels">
+          <label for="username">Username :</label>
+          <label for="email">Email :</label>
+          <label for="password">Password :</label>
+        </div>
+        <div class="inputs">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            minlength="6"
+          />
+          <input type="hidden" name="_method" value="PUT" />
+        </div>
+        <button class="btn" type="submit">Update user</button>
+      </form>
+      <div>
+        <form action="" method="POST">
+          <input type="hidden" name="_method" value="DELETE" />
+          <button class="btn" type="submit">Delete user</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script>
+  function validatePassword() {
+    const password = document.getElementById("password");
+    console.log(password.value);
+    if (password.value.length < 6) {
+      alert("Password must be at least 6 characters");
+      return false;
+    }
+    return true;
+  }
+  function generateURL() {
+    const URL = document.getElementById("user").href;
+    document.getElementById("user").href = document.getElementById("userID").textContent;
+    console.log(document.getElementById("userID").textContent);
+    console.log(URL);
+  }
+
+</script>
+<style>
+  body {
+    background-color: black !important;
+    color: white;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    /* grid-template-columns: ; */
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .form {
+    display: grid;
+    grid-template-areas: "area1 area2" "area3 area4";
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 3fr 1fr;
+    gap: 5px;
+  }
+  .labels {
+    grid-area: area1;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  .inputs {
+    grid-area: area2;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  .btn {
+    grid-area: area4;
+  }
+  .msg {
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+</html>
